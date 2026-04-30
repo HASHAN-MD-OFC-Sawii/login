@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR HASHUU | Why Choose Us?</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #010204;
+            --primary: #ff0055;
+            --secondary: #7000ff;
+            --accent: #00f2ff;
+            --card: rgba(255, 255, 255, 0.03);
+            --grad: linear-gradient(135deg, #ff0055 0%, #7000ff 50%, #00f2ff 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); color: #fff; line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; }
+
+        .content-wrapper { position: relative; z-index: 10; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+
+        header { text-align: center; margin-bottom: 50px; }
+        header h1 { 
+            font-size: clamp(32px, 8vw, 48px); font-weight: 800; 
+            background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        header p { color: var(--accent); letter-spacing: 2px; font-weight: 600; text-transform: uppercase; font-size: 12px; }
+
+        .feature-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; }
+
+        .card {
+            background: var(--card); border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px; border-radius: 25px; backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .card i { font-size: 30px; margin-bottom: 15px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card h3 { margin-bottom: 10px; font-size: 20px; color: #fff; }
+        .card p { font-size: 14px; color: #94a3b8; }
+
+        .pricing-box {
+            background: linear-gradient(rgba(255,0,85,0.1), rgba(112,0,255,0.1));
+            border: 2px solid var(--primary); padding: 40px; border-radius: 30px;
+            text-align: center; margin-bottom: 40px; position: relative; overflow: hidden;
+        }
+        .pricing-box h2 { font-size: 40px; font-weight: 800; margin: 10px 0; }
+        .pricing-box .badge { 
+            background: var(--primary); padding: 5px 15px; border-radius: 50px; 
+            font-size: 12px; font-weight: 800; text-transform: uppercase;
+        }
+
+        .cta-button {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            background: #25d366; color: #fff; padding: 20px; border-radius: 20px;
+            text-decoration: none; font-weight: 800; font-size: 18px; transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+        .cta-button:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        footer { text-align: center; margin-top: 50px; color: #475569; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<div class="content-wrapper">
+    <header class="animate__animated animate__fadeInDown">
+        <p>Advanced Security Solutions</p>
+        <h1>MR HASHUU PROTECT</h1>
+    </header>
+
+    <div class="feature-grid">
+        <!-- Benefit 1 -->
+        <div class="card animate__animated animate__fadeInLeft">
+            <i class="fas fa-shield-halved"></i>
+            <h3>Unbeatable Protection</h3>
+            <p>ඔබේ JavaScript කේතය කිසිවෙකුට කියවිය නොහැකි වන සේ (Obfuscation) ඉතාමත් සූක්ෂම ලෙස ආරක්ෂා කරයි.</p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="card animate__animated animate__fadeInRight" style="animation-delay: 0.2s;">
+            <i class="fas fa-bolt"></i>
+            <h3>High Speed Engine</h3>
+            <p>ප්‍රමාදයකින් තොරව තත්පර කිහිපයක් ඇතුළත ඕනෑම ප්‍රමාණයක කේතයක් ආරක්ෂා කර දීමේ හැකියාව.</p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="card animate__animated animate__fadeInLeft" style="animation-delay: 0.4s;">
+            <i class="fas fa-lock"></i>
+            <h3>Anti-Debug & Domain Lock</h3>
+            <p>වෙනත් පුද්ගලයින් ඔබේ කේතය පරීක්ෂා කිරීම (Debug) වැළැක්වීම සහ නිශ්චිත වෙබ් අඩවියකට පමණක් කේතය සීමා කිරීමේ හැකියාව.</p>
+        </div>
+    </div>
+
+    <div class="pricing-box animate__animated animate__zoomIn" style="animation-delay: 0.6s;">
+        <span class="badge">Limited Offer</span>
+        <p style="margin-top: 15px; color: #cbd5e1;">Lifetime Access Premium Plan</p>
+        <h2>Rs. 120.00</h2>
+        <p style="font-size: 13px; color: var(--accent);">Get Unlimited Energy & All Premium Features</p>
+    </div>
+
+    <a href="https://wa.me/94703457206" class="cta-button animate__animated animate__pulse animate__infinite">
+        <i class="fab fa-whatsapp"></i> CONTACT TO BUY
+    </a>
+
+    <footer>
+        &copy; 2026 MR HASHUU Security System. All Rights Reserved.
+    </footer>
+</div>
+
+<script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 50 },
+            "color": { "value": "#ff0055" },
+            "opacity": { "value": 0.2 },
+            "size": { "value": 2 },
+            "line_linked": { "enable": true, "distance": 150, "color": "#7000ff", "opacity": 0.1 },
+            "move": { "enable": true, "speed": 1 }
+        }
+    });
+</script>
+
+</body>
+</html>
