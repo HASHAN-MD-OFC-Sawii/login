@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR HASHUU | Secure Gateway</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #010204;
+            --primary: #ff0055;
+            --secondary: #7000ff;
+            --accent: #00f2ff;
+            --card: rgba(13, 17, 23, 0.9);
+            --border: rgba(255, 255, 255, 0.1);
+            --grad: linear-gradient(135deg, #ff0055 0%, #7000ff 50%, #00f2ff 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { 
+            height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); color: #fff; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 0; }
+
+        .login-card {
+            position: relative; z-index: 1; width: 100%; max-width: 450px;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 30px; padding: 40px; backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 20px rgba(255, 0, 85, 0.1);
+            text-align: center;
+        }
+
+        .logo h1 {
+            font-weight: 800; font-size: 32px; background: var(--grad);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .logo p { font-size: 12px; color: #94a3b8; margin-bottom: 30px; letter-spacing: 2px; }
+
+        .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; text-align: left; }
+        .full-width { grid-column: span 2; }
+
+        .field { display: flex; flex-direction: column; gap: 5px; }
+        .field label { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-left: 5px; }
+        
+        input {
+            background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+            padding: 12px 15px; border-radius: 12px; color: #fff;
+            outline: none; transition: 0.3s; font-size: 13px;
+        }
+        input:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+
+        .btn-access {
+            width: 100%; padding: 15px; border-radius: 15px; border: none;
+            background: var(--grad); color: #fff; font-weight: 800;
+            font-size: 16px; cursor: pointer; transition: 0.4s;
+            margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-access:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 0, 85, 0.3); }
+
+        .footer-link { margin-top: 20px; font-size: 11px; color: #64748b; }
+        .footer-link span { color: var(--accent); cursor: pointer; }
+
+        /* Animation for Glow */
+        .glow-circle {
+            position: absolute; width: 200px; height: 200px;
+            background: var(--primary); filter: blur(100px);
+            border-radius: 50%; z-index: -1; opacity: 0.2;
+            animation: float 6s infinite alternate;
+        }
+
+        @keyframes float {
+            from { transform: translate(-50%, -50%); }
+            to { transform: translate(50%, 50%); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+<div class="glow-circle" style="top: 20%; left: 20%;"></div>
+<div class="glow-circle" style="bottom: 20%; right: 20%; background: var(--secondary);"></div>
+
+<div class="login-card animate__animated animate__zoomIn">
+    <div class="logo">
+        <h1>MR HASHUU</h1>
+        <p>SECURE GATEWAY ACCESS</p>
+    </div>
+
+    <form id="gateForm">
+        <div class="input-group">
+            <!-- 1. Redeem Code -->
+            <div class="field full-width">
+                <label><i class="fas fa-key"></i> Redeem Code</label>
+                <input type="text" id="rCode" placeholder="Enter valid HASH-XXXX code" required>
+            </div>
+            
+            <!-- 2. Name -->
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" id="uName" placeholder="Your Name" required>
+            </div>
+
+            <!-- 3. Age -->
+            <div class="field">
+                <label>Age</label>
+                <input type="number" id="uAge" placeholder="Age" required>
+            </div>
+
+            <!-- 4. Nickname -->
+            <div class="field">
+                <label>Nickname</label>
+                <input type="text" id="uNick" placeholder="e.g. Hashuu" required>
+            </div>
+
+            <!-- 5. Platform -->
+            <div class="field">
+                <label>Platform</label>
+                <input type="text" id="uPlatform" placeholder="e.g. Android/PC" required>
+            </div>
+
+            <!-- 6. Purpose -->
+            <div class="field full-width">
+                <label>Reason for Access</label>
+                <input type="text" id="uReason" placeholder="What will you use this for?" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-access">
+            UNLOCK ACCESS <i class="fas fa-chevron-right"></i>
+        </button>
+    </form>
+
+    <div class="footer-link">
+        Don't have a code? <span>Contact Admin</span>
+    </div>
+</div>
+
+<script>
+    // Particles Configuration
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 50 },
+            "color": { "value": "#ff0055" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.3 },
+            "size": { "value": 2 },
+            "line_linked": { "enable": true, "distance": 150, "color": "#7000ff", "opacity": 0.2, "width": 1 },
+            "move": { "enable": true, "speed": 2 }
+        }
+    });
+
+    // Form Handling
+    document.getElementById('gateForm').onsubmit = function(e) {
+        e.preventDefault();
+
+        const code = document.getElementById('rCode').value.trim();
+        const name = document.getElementById('uName').value;
+        const targetURL = "https://yoursite.com/main-editor"; // මෙතනට ඔයාගේ Main Site එකේ ලින්ක් එක දාන්න
+
+        // Redeem Code එක Validate කරන විදිහ (මෙතන දැනට HASH-1234 කියන එක වැඩ කරනවා)
+        // පස්සේ කාලෙක API එකක් ගැහුවම මේක Online Check කරන්න පුළුවන්.
+        if(code.startsWith("HASH-") || code === "ADMIN123") {
+            
+            Swal.fire({
+                title: 'Access Granted!',
+                text: `Welcome back, ${name}. Redirecting...`,
+                icon: 'success',
+                background: '#0d1117',
+                color: '#fff',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(() => {
+                // යූසර්ගේ ඩේටා ටික ඕන නම් සේව් කරගන්න පුළුවන් (Local Storage)
+                const userData = {
+                    name: name,
+                    age: document.getElementById('uAge').value,
+                    nick: document.getElementById('uNick').value,
+                    platform: document.getElementById('uPlatform').value,
+                    reason: document.getElementById('uReason').value,
+                    loginTime: new Date().toLocaleString()
+                };
+                localStorage.setItem('gate_user', JSON.stringify(userData));
+
+                // සැබෑ වෙබ්සයිට් එකට යොමු කිරීම (Redirect)
+                window.location.href = targetURL;
+            });
+
+        } else {
+            Swal.fire({
+                title: 'Access Denied',
+                text: 'Invalid Redeem Code. Please check again.',
+                icon: 'error',
+                background: '#0d1117',
+                color: '#fff',
+                confirmButtonColor: '#ff0055'
+            });
+        }
+    };
+</script>
+
+</body>
+</html>
