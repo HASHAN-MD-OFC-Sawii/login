@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR HASHUU | God Mode Armor</title>
+    
+    <!-- Libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator@4.1.0/dist/index.browser.js"></script>
+
+    <style>
+        :root {
+            --bg: #02040a;
+            --primary: #ff0055;
+            --secondary: #7000ff;
+            --accent: #00f2ff;
+            --card: rgba(13, 17, 23, 0.8);
+            --border: rgba(255, 255, 255, 0.1);
+            --grad: linear-gradient(135deg, #ff0055 0%, #7000ff 50%, #00f2ff 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { 
+            min-height: 100vh; font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth;
+        }
+
+        /* Full Background Animation */
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 0; }
+
+        .app-container { position: relative; z-index: 1; padding: 20px; max-width: 1400px; margin: 0 auto; }
+
+        /* Floating Header */
+        header {
+            background: var(--card); border: 1px solid var(--border); border-radius: 25px;
+            padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(20px); margin-bottom: 30px;
+            box-shadow: 0 10px 50px rgba(255, 0, 85, 0.2);
+            animation: fadeInDown 1s;
+        }
+
+        .logo h1 { 
+            font-weight: 800; font-size: 28px; letter-spacing: -1px;
+            background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(255,0,85,0.5));
+        }
+
+        /* Login Button Styling */
+        .admin-login-btn {
+            font-size: 11px; color: var(--text-dim); cursor: pointer;
+            display: flex; align-items: center; gap: 5px; opacity: 0.6; transition: 0.3s;
+        }
+        .admin-login-btn:hover { opacity: 1; color: var(--accent); }
+
+        /* Dashboard Tools */
+        .dashboard-tools {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+            margin-bottom: 30px; animation: fadeInUp 1s;
+        }
+        .tool-box { 
+            background: var(--card); border: 1px solid var(--border); padding: 20px; 
+            border-radius: 20px; display: flex; gap: 10px; transition: 0.4s;
+        }
+        .tool-box:hover { border-color: var(--primary); transform: scale(1.02); box-shadow: 0 0 20px rgba(255,0,85,0.15); }
+
+        /* Workspace Grid */
+        .workspace { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px; }
+        @media (max-width: 1024px) { .workspace { grid-template-columns: 1fr; } }
+
+        .editor-card { 
+            background: var(--card); border: 1px solid var(--border); border-radius: 30px; 
+            height: 450px; display: flex; flex-direction: column; overflow: hidden;
+            transition: 0.5s; backdrop-filter: blur(10px);
+        }
+        .editor-header { 
+            padding: 15px 25px; background: rgba(255,255,255,0.03); 
+            display: flex; justify-content: space-between; font-weight: 800; color: var(--primary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        textarea { 
+            flex: 1; background: transparent; border: none; padding: 25px; 
+            color: #00f2ff; font-family: 'Fira Code', monospace; font-size: 14px; 
+            outline: none; resize: none;
+        }
+
+        /* Config Panel */
+        .config-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px;
+            background: var(--card); padding: 25px; border-radius: 30px; border: 1px solid var(--border);
+            margin-bottom: 30px; animation: zoomIn 0.8s;
+        }
+        .opt { 
+            background: rgba(255,255,255,0.02); padding: 15px; border-radius: 15px; 
+            display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 13px;
+            cursor: pointer; border: 1px solid transparent; transition: 0.3s;
+        }
+        .opt:hover { border-color: var(--secondary); background: rgba(112, 0, 255, 0.1); }
+        input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); }
+
+        /* Buttons & Console */
+        .btn { 
+            padding: 15px 30px; border-radius: 18px; border: none; font-weight: 800;
+            cursor: pointer; transition: 0.4s; display: flex; align-items: center; gap: 10px;
+        }
+        .btn-main { background: var(--grad); color: #fff; position: relative; overflow: hidden; }
+        .btn-main::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: rgba(255,255,255,0.2); transform: rotate(45deg); transition: 0.5s;
+        }
+        .btn-main:hover::after { left: 120%; }
+
+        .btn-sub { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); }
+        
+        .console { 
+            background: #000; border-radius: 20px; padding: 20px; 
+            font-family: 'Fira Code', monospace; font-size: 12px; color: #4ade80;
+            border: 1px solid var(--border); height: 100px; overflow-y: auto; margin-top: 20px;
+        }
+
+        /* Edit Mode Glow */
+        .edit-active { outline: 2px dashed var(--accent) !important; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+
+        .loader-bar { position: fixed; top: 0; left: 0; height: 5px; background: var(--grad); width: 0%; z-index: 2000; transition: 0.3s; }
+
+        input.custom-input { background: #000; border: 1px solid var(--border); padding: 12px; border-radius: 12px; color: #fff; width: 100%; outline: none; }
+    </style>
+</head>
+<body id="mainBody">
+
+<div id="particles-js"></div>
+<div class="loader-bar" id="pBar"></div>
+
+<div class="app-container">
+    <header>
+        <div class="logo">
+            <h1 class="animate__animated animate__pulse animate__infinite">MR HASHUU</h1>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
+            <div style="font-weight: 800; font-size: 16px;">
+                <i class="fas fa-bolt" style="color: #fbbf24;"></i> <span id="energyVal">20</span>
+            </div>
+            <div class="admin-login-btn" onclick="adminAuth()">
+                <i class="fas fa-user-shield"></i> login
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Redeem Area -->
+    <div class="dashboard-tools">
+        <div class="tool-box animate__animated animate__fadeInLeft">
+            <input type="text" id="redeemIn" class="custom-input" placeholder="Enter Secret Code">
+            <button class="btn btn-main" style="padding: 10px 20px;" onclick="claimCode()">Redeem</button>
+        </div>
+        <div class="tool-box animate__animated animate__fadeInRight">
+            <input type="text" id="genOut" class="custom-input" placeholder="New Code" readonly>
+            <button class="btn btn-sub" style="padding: 10px 20px;" onclick="createCode()">Generate (+50)</button>
+        </div>
+    </div>
+
+    <div class="workspace">
+        <div class="editor-card animate__animated animate__zoomIn">
+            <div class="editor-header"><span>SOURCE JS</span><i class="fas fa-code"></i></div>
+            <textarea id="inputArea" placeholder="// Type or paste your code here..."></textarea>
+        </div>
+        <div class="editor-card animate__animated animate__zoomIn" style="animation-delay: 0.2s;">
+            <div class="editor-header"><span>ARMORED JS</span><i class="fas fa-shield-virus"></i></div>
+            <textarea id="outputArea" readonly placeholder="// Secured code will appear here..."></textarea>
+        </div>
+    </div>
+
+    <div class="config-grid">
+        <label class="opt"><input type="checkbox" id="cFlow" checked> Control Flow</label>
+        <label class="opt"><input type="checkbox" id="sArray" checked> Hex String Array</label>
+        <label class="opt"><input type="checkbox" id="b64" checked> Base64 Encode</label>
+        <label class="opt"><input type="checkbox" id="math" checked> Math Expressions</label>
+        <label class="opt"><input type="checkbox" id="anti" checked> Anti-Debugger</label>
+        <label class="opt"><input type="checkbox" id="self" checked> Self Defending</label>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <button class="btn btn-sub" onclick="clearAll()">RESET</button>
+        <button class="btn btn-main" style="padding: 18px 50px; font-size: 16px;" onclick="protectCode()">
+            <i class="fas fa-lock"></i> ENCRYPT SOURCE
+        </button>
+        <button class="btn btn-sub" onclick="copyResult()">COPY</button>
+    </div>
+
+    <!-- Admin Floating Button (Visible after login) -->
+    <button id="editToggle" class="btn btn-main" style="position: fixed; bottom: 20px; right: 20px; display: none; border-radius: 50%; width: 60px; height: 60px; justify-content: center;" onclick="toggleEditMode()">
+        <i class="fas fa-edit"></i>
+    </button>
+
+    <div class="console" id="logs">> MR HASHUU Security System V7.0 Online...</div>
+</div>
+
+<script>
+    // Initialize Particles
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": ["#ff0055", "#7000ff", "#00f2ff"] },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.5, "random": true },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#7000ff", "opacity": 0.2, "width": 1 },
+            "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }
+        }
+    });
+
+    // --- State Management ---
+    let state = {
+        energy: parseInt(localStorage.getItem('h_energy')) || 20,
+        codes: JSON.parse(localStorage.getItem('h_codes')) || [],
+        isAdmin: false,
+        isEditMode: false
+    };
+
+    function updateUI() {
+        document.getElementById('energyVal').innerText = state.energy;
+        localStorage.setItem('h_energy', state.energy);
+        localStorage.setItem('h_codes', JSON.stringify(state.codes));
+    }
+    updateUI();
+
+    function log(msg, color = "#4ade80") {
+        const l = document.getElementById('logs');
+        l.innerHTML += `<div style="color:${color}">> [${new Date().toLocaleTimeString()}] ${msg}</div>`;
+        l.scrollTop = l.scrollHeight;
+    }
+
+    // --- Admin & Edit Mode Logic ---
+    async function adminAuth() {
+        const { value: pass } = await Swal.fire({
+            title: 'Admin Access',
+            input: 'password',
+            inputPlaceholder: 'Enter Admin Password',
+            background: '#0d1117', color: '#fff',
+            confirmButtonColor: '#ff0055'
+        });
+
+        if(pass === 'hashuu123') {
+            state.isAdmin = true;
+            document.getElementById('editToggle').style.display = 'flex';
+            log("Admin access granted. Edit Mode available.", "#00f2ff");
+            Swal.fire('Unlocked', 'You can now toggle Edit Mode using the floating button.', 'success');
+        } else {
+            Swal.fire('Access Denied', 'Invalid password.', 'error');
+        }
+    }
+
+    function toggleEditMode() {
+        state.isEditMode = !state.isEditMode;
+        const body = document.body;
+        
+        if(state.isEditMode) {
+            body.contentEditable = 'true';
+            document.querySelectorAll('header, .tool-box, .config-grid, textarea, .btn').forEach(el => el.classList.add('edit-active'));
+            log("Edit Mode: ENABLED. You can now click and edit any text/element.", "#fbbf24");
+            Swal.fire({ title: 'Edit Mode ON', text: 'Click on any text or element to change it.', toast: true, position: 'top' });
+        } else {
+            body.contentEditable = 'false';
+            document.querySelectorAll('.edit-active').forEach(el => el.classList.remove('edit-active'));
+            log("Edit Mode: DISABLED. All changes saved locally.", "#4ade80");
+            Swal.fire({ title: 'Edit Mode OFF', text: 'Changes finalized.', toast: true, position: 'top' });
+        }
+    }
+
+    // --- Redeem System ---
+    function createCode() {
+        const code = 'MRH-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+        state.codes.push(code);
+        updateUI();
+        document.getElementById('genOut').value = code;
+        log(`New redeem code generated: ${code}`, "#7000ff");
+    }
+
+    function claimCode() {
+        const input = document.getElementById('redeemIn').value.trim();
+        const index = state.codes.indexOf(input);
+        if(index > -1) {
+            state.energy += 50;
+            state.codes.splice(index, 1);
+            updateUI();
+            document.getElementById('redeemIn').value = '';
+            log("Code redeemed successfully! +50 energy added.", "#4ade80");
+            Swal.fire('Success', '50 Energy added to your balance!', 'success');
+        } else {
+            Swal.fire('Error', 'Invalid or expired code.', 'error');
+        }
+    }
+
+    // --- Encryption Core ---
+    function protectCode() {
+        const input = document.getElementById('inputArea').value;
+        if(!input) return;
+        if(state.energy < 5) return Swal.fire('Low Energy', 'Please generate or redeem a code.', 'warning');
+
+        const bar = document.getElementById('pBar');
+        bar.style.width = '100%';
+        log("Analyzing source with MR HASHUU AI...");
+
+        setTimeout(() => {
+            try {
+                const res = JavaScriptObfuscator.obfuscate(input, {
+                    compact: true,
+                    controlFlowFlattening: document.getElementById('cFlow').checked,
+                    stringArray: document.getElementById('sArray').checked,
+                    stringArrayEncoding: document.getElementById('b64').checked ? ['base64'] : [],
+                    numbersToExpressions: document.getElementById('math').checked,
+                    debugProtection: document.getElementById('anti').checked,
+                    selfDefending: document.getElementById('self').checked
+                }).getObfuscatedCode();
+
+                document.getElementById('outputArea').value = res;
+                state.energy -= 5;
+                updateUI();
+                log("Encryption Success. Code is now 100% Armored.", "#00f2ff");
+                bar.style.width = '0%';
+            } catch (e) {
+                log("Error: " + e.message, "#ff0055");
+                bar.style.width = '0%';
+            }
+        }, 800);
+    }
+
+    function clearAll() { document.getElementById('inputArea').value = ''; document.getElementById('outputArea').value = ''; log("Workspace cleared."); }
+    function copyResult() { 
+        document.getElementById('outputArea').select(); 
+        document.execCommand('copy'); 
+        Swal.fire({ title: 'Copied!', toast: true, position: 'top-end', showConfirmButton: false, timer: 1000 }); 
+    }
+</script>
+</body>
+</html>
