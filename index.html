@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR HASHUU | Portal</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body { margin: 0; background: #020408; font-family: 'Plus Jakarta Sans', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        #import-target { width: 100%; display: flex; justify-content: center; z-index: 10; }
+        
+        /* Styles needed for the imported content */
+        .login-card { background: rgba(15, 18, 25, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 35px; padding: 40px; width: 350px; backdrop-filter: blur(20px); text-align: center; color: white; }
+        .form-stack { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; text-align: left; }
+        .input-field { display: flex; flex-direction: column; gap: 5px; }
+        label { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-left: 5px; }
+        input { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; color: white; outline: none; }
+        .btn-primary { width: 100%; padding: 15px; border-radius: 15px; border: none; background: linear-gradient(135deg, #ff0055 0%, #7000ff 100%); color: white; font-weight: 800; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <!-- මෙතනට තමයි hashu.html එක Load වෙන්නේ -->
+    <div id="import-target"></div>
+
+    <script>
+        // Fetch API එක පාවිච්චි කරලා hashu.html එක Import කිරීම
+        fetch('hashu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('import-target').innerHTML = data;
+                
+                // ඇතුළත ඇති Scripts වැඩ කිරීමට මෙය අවශ්‍යයි
+                const scripts = document.getElementById('import-target').getElementsByTagName('script');
+                for (let n = 0; n < scripts.length; n++) {
+                    eval(scripts[n].innerHTML);
+                }
+            })
+            .catch(err => console.error('Error loading the file:', err));
+    </script>
+
+</body>
+</html>
