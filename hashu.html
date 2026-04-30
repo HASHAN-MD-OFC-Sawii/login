@@ -235,7 +235,7 @@
     document.getElementById('accessForm').onsubmit = function(e) {
         e.preventDefault();
         const key = document.getElementById('code').value.trim();
-        const mainURL = "https://hashan-md-ofc-sawii.github.io/hide-jscodes/hashuu.html"; 
+        const dashboardURL = "dashboard.html"; // සාර්ථක වූ විට යන පිටුව
 
         if(key.includes("HASH-") || key === "ADMIN") {
             Swal.fire({
@@ -248,7 +248,7 @@
                 didOpen: () => { Swal.showLoading() }
             }).then(() => {
                 localStorage.setItem('auth_success', 'true');
-                window.top.location.replace(mainURL);
+                window.location.href = dashboardURL; // Dashboard එකට Redirect වීම
             });
         } else {
             Swal.fire({
