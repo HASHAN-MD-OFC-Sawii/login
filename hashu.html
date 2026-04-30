@@ -86,7 +86,6 @@
         }
         .btn-access:hover { filter: brightness(1.2); transform: scale(1.02); box-shadow: 0 15px 50px rgba(255, 0, 85, 0.5); }
 
-        /* Get Premium Button Styling */
         .btn-premium {
             display: flex; align-items: center; justify-content: center; gap: 10px;
             width: 100%; padding: 16px; border-radius: 20px;
@@ -96,6 +95,7 @@
             text-decoration: none; font-weight: 800; font-size: 14px;
             letter-spacing: 1px; transition: 0.4s;
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.05);
+            cursor: pointer;
         }
         .btn-premium:hover {
             background: rgba(0, 242, 255, 0.15);
@@ -103,6 +103,14 @@
             transform: translateY(-2px);
             color: #fff;
             border-color: var(--accent);
+        }
+
+        .sl-time {
+            margin-top: 15px;
+            font-size: 10px;
+            color: #94a3b8;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         .glow { position: absolute; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.25; }
@@ -161,12 +169,13 @@
             </button>
         </form>
 
-        <!-- Premium Button Added Here -->
-        <a href="https://hashan-md-ofc-sawii.github.io/site-details/" class="btn-premium">
+        <button type="button" id="getPremiumBtn" class="btn-premium">
             GET PREMIUM <i class="fas fa-crown"></i>
-        </a>
+        </button>
 
-        <p style="margin-top: 30px; font-size: 11px; color: #64748b; font-weight: 600;">
+        <div id="slClock" class="sl-time">SRI LANKA: 00:00:00 AM</div>
+
+        <p style="margin-top: 15px; font-size: 11px; color: #64748b; font-weight: 600;">
             SECURED BY <span style="color: var(--primary);">MR HASHUU</span> PROTECTION
         </p>
     </div>
@@ -188,9 +197,43 @@
         });
     }
 
+    // Sri Lanka Clock Function
+    function updateClock() {
+        const now = new Date();
+        const options = { timeZone: 'Asia/Colombo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        const timeString = now.toLocaleTimeString('en-US', options);
+        document.getElementById('slClock').innerText = "SRI LANKA: " + timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Premium Fetch Function
+    document.getElementById('getPremiumBtn').onclick = function() {
+        fetch('premium.html')
+            .then(response => {
+                if (!response.ok) throw new Error('File not found');
+                return response.text();
+            })
+            .then(data => {
+                Swal.fire({
+                    title: '<span style="color: #00f2ff; font-weight: 800;">PREMIUM ACCESS</span>',
+                    html: `<div style="text-align: left; font-size: 14px; color: #fff;">${data}</div>`,
+                    background: '#020408',
+                    backdrop: 'blur(20px)',
+                    width: '400px',
+                    showConfirmButton: true,
+                    confirmButtonText: 'CLOSE',
+                    confirmButtonColor: '#ff0055',
+                    customClass: { popup: 'animate__animated animate__zoomIn' }
+                });
+            })
+            .catch(err => {
+                Swal.fire({ icon: 'error', title: 'Error', text: 'premium.html not found!', background: '#020408', color: '#fff' });
+            });
+    };
+
     document.getElementById('accessForm').onsubmit = function(e) {
         e.preventDefault();
-        
         const key = document.getElementById('code').value.trim();
         const mainURL = "https://hashan-md-ofc-sawii.github.io/hide-jscodes/hashuu.html"; 
 
