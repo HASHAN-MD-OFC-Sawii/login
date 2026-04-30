@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MR HASHUU | Premium Access</title>
+    <title>MR HASHUU | Access Portal</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
@@ -14,194 +14,187 @@
 
     <style>
         :root {
-            --bg: #030508;
+            --bg: #020408;
             --primary: #ff0055;
             --secondary: #7000ff;
             --accent: #00f2ff;
-            --glass: rgba(13, 17, 23, 0.7);
-            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(15, 18, 25, 0.8);
+            --border: rgba(255, 255, 255, 0.1);
             --grad: linear-gradient(135deg, #ff0055 0%, #7000ff 50%, #00f2ff 100%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Screen Fit Setup */
         body, html { 
-            width: 100%; height: 100%; 
+            width: 100%; min-height: 100%; 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: var(--bg); color: #fff; 
-            overflow: hidden; /* No scroll for gateway */
-            display: flex; align-items: center; justify-content: center;
+            display: flex; justify-content: center; align-items: center;
+            overflow-x: hidden;
         }
 
         #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; }
 
-        /* Central Container */
-        .wrapper {
+        .container {
             position: relative; z-index: 10;
-            width: 90%; max-width: 480px;
-            padding: 5px; /* Spacing from screen edges on mobile */
+            width: 95%; max-width: 450px;
+            padding: 20px 0;
+            animation: fadeIn 1s ease-out;
         }
 
         .login-card {
             background: var(--glass);
             border: 1px solid var(--border);
-            border-radius: 35px;
-            padding: 40px 30px;
-            backdrop-filter: blur(25px);
-            box-shadow: 0 25px 80px rgba(0,0,0,0.9);
+            border-radius: 40px;
+            padding: 40px 25px;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 30px 100px rgba(0,0,0,0.9);
             text-align: center;
-            border-bottom: 4px solid var(--primary);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .logo-area { margin-bottom: 30px; }
-        .logo-area h1 {
-            font-weight: 800; font-size: clamp(28px, 5vw, 36px);
+        .header-section { margin-bottom: 30px; }
+        .header-section h1 {
+            font-weight: 800; font-size: 35px;
             background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            letter-spacing: -1px; margin-bottom: 5px;
+            letter-spacing: -1.5px;
         }
-        .logo-area p { font-size: 10px; color: #64748b; letter-spacing: 3px; text-transform: uppercase; }
+        .header-section p { font-size: 10px; color: var(--accent); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; margin-top: 5px; }
 
-        /* Form Layout */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-        .span-2 { grid-column: span 2; }
+        /* Questions stacked vertically */
+        .form-stack { display: flex; flex-direction: column; gap: 18px; margin-bottom: 30px; }
 
-        .input-box { display: flex; flex-direction: column; gap: 6px; text-align: left; }
-        .input-box label { font-size: 10px; font-weight: 800; color: var(--accent); margin-left: 10px; }
-        
+        .input-group { text-align: left; display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-size: 11px; font-weight: 700; color: #94a3b8; margin-left: 12px; display: flex; align-items: center; gap: 8px; }
+        .input-group label i { color: var(--primary); font-size: 13px; }
+
         input {
-            background: rgba(255,255,255,0.03);
+            background: rgba(0,0,0,0.4);
             border: 1px solid var(--border);
-            padding: 14px 18px; border-radius: 16px;
+            padding: 15px 20px; border-radius: 18px;
             color: #fff; font-size: 14px; outline: none;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
-        input:focus { border-color: var(--primary); background: rgba(255,255,255,0.06); box-shadow: 0 0 15px rgba(255, 0, 85, 0.2); }
+        input:focus { border-color: var(--accent); background: rgba(255,255,255,0.05); box-shadow: 0 0 20px rgba(0, 242, 255, 0.15); transform: translateY(-2px); }
 
-        .btn-glow {
-            width: 100%; padding: 16px; border-radius: 18px; border: none;
+        .btn-access {
+            width: 100%; padding: 18px; border-radius: 20px; border: none;
             background: var(--grad); color: #fff; font-weight: 800;
             font-size: 16px; cursor: pointer; transition: 0.4s;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 10px 30px rgba(255, 0, 85, 0.3);
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            box-shadow: 0 10px 40px rgba(255, 0, 85, 0.3);
         }
-        .btn-glow:hover { transform: scale(1.02); filter: brightness(1.1); box-shadow: 0 15px 40px rgba(255, 0, 85, 0.4); }
+        .btn-access:hover { filter: brightness(1.2); transform: scale(1.02); box-shadow: 0 15px 50px rgba(255, 0, 85, 0.5); }
 
-        /* Background Effects */
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.3;
-            animation: move 10s infinite alternate;
-        }
-        .orb-1 { width: 300px; height: 300px; background: var(--primary); top: -100px; right: -100px; }
-        .orb-2 { width: 250px; height: 250px; background: var(--secondary); bottom: -100px; left: -100px; }
+        /* Neon Decorations */
+        .glow { position: absolute; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.25; }
+        .glow-1 { width: 300px; height: 300px; background: var(--primary); top: -50px; right: -50px; }
+        .glow-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -50px; left: -50px; }
 
-        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(50px, 50px); } }
-
-        /* Mobile Adjustments */
-        @media (max-width: 400px) {
-            .login-card { padding: 30px 20px; }
-            .form-grid { gap: 10px; }
-        }
     </style>
 </head>
 <body>
 
 <div id="particles-js"></div>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
 
-<div class="wrapper">
-    <div class="login-card animate__animated animate__fadeInUp">
-        <div class="logo-area">
+<div class="container">
+    <div class="login-card animate__animated animate__zoomIn">
+        <div class="header-section">
             <h1 class="animate__animated animate__pulse animate__infinite">MR HASHUU</h1>
-            <p>Vault Authentication</p>
+            <p>Verification Required</p>
         </div>
 
         <form id="accessForm">
-            <div class="form-grid">
-                <!-- Redeem -->
-                <div class="input-box span-2">
-                    <label>REDEEM KEY</label>
-                    <input type="text" id="k" placeholder="HASH-XXXXXX" required>
+            <div class="form-stack">
+                <!-- 1. Redeem Code -->
+                <div class="input-group">
+                    <label><i class="fas fa-key"></i> ACCESS KEY</label>
+                    <input type="text" id="code" placeholder="HASH-XXXXXX" required>
                 </div>
                 
-                <!-- Info -->
-                <div class="input-box">
-                    <label>NAME</label>
-                    <input type="text" id="n" placeholder="Full Name" required>
+                <!-- 2. Full Name -->
+                <div class="input-group">
+                    <label><i class="fas fa-user"></i> FULL NAME</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
                 </div>
-                <div class="input-box">
-                    <label>AGE</label>
-                    <input type="number" id="a" placeholder="Age" required>
+
+                <!-- 3. Age -->
+                <div class="input-group">
+                    <label><i class="fas fa-calendar-alt"></i> AGE</label>
+                    <input type="number" id="age" placeholder="How old are you?" required>
                 </div>
-                <div class="input-box">
-                    <label>NICKNAME</label>
-                    <input type="text" id="ni" placeholder="Alias" required>
+
+                <!-- 4. Nickname -->
+                <div class="input-group">
+                    <label><i class="fas fa-user-tag"></i> NICKNAME</label>
+                    <input type="text" id="nick" placeholder="Alias / Handle" required>
                 </div>
-                <div class="input-box">
-                    <label>PLATFORM</label>
-                    <input type="text" id="p" placeholder="Android/PC" required>
+
+                <!-- 5. Platform -->
+                <div class="input-group">
+                    <label><i class="fas fa-laptop-code"></i> PLATFORM</label>
+                    <input type="text" id="platform" placeholder="e.g. Android, Windows, iOS" required>
                 </div>
-                <div class="input-box span-2">
-                    <label>OBJECTIVE</label>
-                    <input type="text" id="o" placeholder="Why do you need access?" required>
+
+                <!-- 6. Objective -->
+                <div class="input-group">
+                    <label><i class="fas fa-target-cell"></i> PURPOSE</label>
+                    <input type="text" id="purpose" placeholder="Why do you need access?" required>
                 </div>
             </div>
 
-            <button type="submit" class="btn-glow">
-                ENTER THE VAULT <i class="fas fa-unlock-alt"></i>
+            <button type="submit" class="btn-access">
+                UNLOCK SYSTEM <i class="fas fa-shield-halved"></i>
             </button>
         </form>
 
-        <p style="margin-top: 25px; font-size: 11px; color: #475569;">
-            Unauthorized access is logged. <span style="color:var(--accent); cursor:pointer;">Need help?</span>
+        <p style="margin-top: 30px; font-size: 11px; color: #64748b; font-weight: 600;">
+            SECURED BY <span style="color: var(--primary);">MR HASHUU</span> PROTECTION
         </p>
     </div>
 </div>
 
 <script>
-    // Particle JS for deep background
+    // Particles setup
     particlesJS("particles-js", {
         "particles": {
-            "number": { "value": 80 },
+            "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
             "color": { "value": "#ffffff" },
-            "opacity": { "value": 0.1 },
-            "size": { "value": 1.5 },
-            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.05, "width": 1 },
-            "move": { "enable": true, "speed": 1 }
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.2, "random": true },
+            "size": { "value": 2, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#7000ff", "opacity": 0.1, "width": 1 },
+            "move": { "enable": true, "speed": 2, "direction": "none", "out_mode": "out" }
         }
     });
 
     document.getElementById('accessForm').onsubmit = function(e) {
         e.preventDefault();
         
-        const key = document.getElementById('k').value.trim();
-        const name = document.getElementById('n').value;
+        const key = document.getElementById('code').value.trim();
         const mainURL = "https://your-main-site.com"; // මෙතනට ඔයාගේ ලින්ක් එක දාන්න
 
-        // Simple Key Validation
         if(key.includes("HASH-") || key === "ADMIN") {
             Swal.fire({
-                title: 'Verifying Identity...',
-                html: 'Securing connection to MR HASHUU servers.',
-                timer: 2000,
+                title: 'Accessing...',
+                html: 'Establishing secure tunnel to the vault.',
+                timer: 2500,
                 timerProgressBar: true,
-                background: '#0a0b0e',
+                background: '#0d1117',
                 color: '#fff',
                 didOpen: () => { Swal.showLoading() }
             }).then(() => {
-                // Save user session
-                localStorage.setItem('session_active', 'true');
-                localStorage.setItem('user_name', name);
-                
+                localStorage.setItem('auth_success', 'true');
                 window.location.href = mainURL;
             });
         } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Invalid Key',
-                text: 'Please provide a valid MR HASHUU access key.',
-                background: '#0a0b0e',
+                text: 'Access Denied. Please use a valid key.',
+                background: '#0d1117',
                 color: '#fff',
                 confirmButtonColor: '#ff0055'
             });
